@@ -89,7 +89,7 @@ void MainWindow::updateBoard(int i,int j)
     }
 }
 
-void MainWindow::checkWinner()
+bool MainWindow::checkWinner()
 {
 
     if ((board[0][0] == board[0][1] && board[0][0] == board[0][2] && board[0][0] != -1 && board[0][1] != -1 && board[0][2] != -1)
@@ -102,6 +102,7 @@ void MainWindow::checkWinner()
             || (board[0][2] == board[1][2] && board[0][2] == board[2][2] && board[0][2] != -1 && board[1][2] != -1 && board[2][2] != -1)) {
         current_status == playerClicked::cross ? ui->label_2->setText("Победил крестик!") : ui->label_2->setText("Победил нолик!");
         endOfGame();
+        return true;
     }
 
     int empty_cell_counter = 0;
@@ -115,7 +116,9 @@ void MainWindow::checkWinner()
     if (!empty_cell_counter) {
         ui->label_2->setText("Победила Ничья!");
         endOfGame();
+        return true;
     }
+    return false;
 }
 
 
@@ -164,7 +167,9 @@ void MainWindow::on_pushButton_7_clicked()
 {
     if (setCellImage(ui->pushButton_7,1,2)) {
         updateBoard(1,2);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -173,7 +178,9 @@ void MainWindow::on_pushButton_3_clicked()
 {
     if (setCellImage(ui->pushButton_3,0,0)) {
         updateBoard(0,0);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -182,7 +189,9 @@ void MainWindow::on_pushButton_4_clicked()
 {
     if (setCellImage(ui->pushButton_4,0,1)) {
         updateBoard(0,1);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -192,7 +201,9 @@ void MainWindow::on_pushButton_5_clicked()
 {
     if (setCellImage(ui->pushButton_5,0,2)) {
         updateBoard(0,2);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -201,7 +212,9 @@ void MainWindow::on_pushButton_8_clicked()
 {
     if (setCellImage(ui->pushButton_8,1,0)) {
         updateBoard(1,0);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -210,7 +223,9 @@ void MainWindow::on_pushButton_6_clicked()
 {
     if (setCellImage(ui->pushButton_6,1,1)) {
         updateBoard(1,1);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -219,7 +234,9 @@ void MainWindow::on_pushButton_11_clicked()
 {
     if (setCellImage(ui->pushButton_11,2,0)) {
         updateBoard(2,0);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -228,7 +245,9 @@ void MainWindow::on_pushButton_9_clicked()
 {
     if (setCellImage(ui->pushButton_9,2,1)) {
         updateBoard(2,1);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -237,7 +256,9 @@ void MainWindow::on_pushButton_10_clicked()
 {
     if (setCellImage(ui->pushButton_10,2,2)) {
         updateBoard(2,2);
-        checkWinner();
+        if (!checkWinner()) {
+            changeIcon();
+        }
     }
 }
 
@@ -251,5 +272,10 @@ void MainWindow::on_pushButton_12_clicked()
     ui->pushButton->setEnabled(true);
     ui->pushButton_2->setEnabled(true);
 
+}
+
+void MainWindow::changeIcon()
+{
+    current_status == playerClicked::cross ? on_pushButton_2_clicked() : on_pushButton_clicked();
 }
 

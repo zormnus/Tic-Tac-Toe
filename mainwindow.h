@@ -51,12 +51,13 @@ private:
     int current_status;
     QVector<QPushButton*> buttons;
 
+    void changeIcon();
     bool checkPlayer();
     bool setCellImage(QPushButton* btn, int i,int j);
     void setBaseStyle();
     void endOfGame();
     void updateBoard(int i,int j);
-    void checkWinner();
+    bool checkWinner();
 
     int board[3][3] {
         {-1,-1,-1},
